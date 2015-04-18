@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "watir-webdriver", "~> 0.7.0"
   
-  spec.add_development_dependency "bundler", "~> 1.9"
+  spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.2.0"
   spec.add_development_dependency "cucumber", "~> 2.0.0"

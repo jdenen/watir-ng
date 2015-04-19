@@ -48,5 +48,5 @@ Or install it yourself with:
 
 ## Questions, Comments, Concerns
 
-Find my on Twitter ([@jpdenen](http://twitter.com/jpdenen)) or write up an issue.
+Find me on Twitter ([@jpdenen](http://twitter.com/jpdenen)) or write up an issue.
 

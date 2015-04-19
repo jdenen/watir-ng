@@ -11,10 +11,6 @@ When /^I identify a "(.*)" element with an "(.*)" of "(.*)"$/ do |tag, ng, value
   @element = @browser.send(tag, identifier)
 end
 
-Then /^my WebDriver instance knows the element exists$/ do
-  @element.exists?
-end
-
-Then /^my WebDriver instance sees the element$/ do
-  @element.visible?
+Then /^my WebDriver instance reports the element (\w+)$/ do |expectation|
+  expectation == "present" ? @element.present? : !@element.present?
 end

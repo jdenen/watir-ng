@@ -37,7 +37,7 @@ And then execute:
 
 Or install it yourself with:
 
-   $ gem install watir-ng
+    $ gem install watir-ng
 
 ## Contributing
 

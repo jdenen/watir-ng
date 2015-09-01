@@ -23,3 +23,9 @@ Feature: Identifying HTML elements with ng directives
     | ng_click   | bar   |
     | id         | fizz  |
     | class      | buzz  |
+
+  @configuration
+  Scenario: Identifying a custom directive
+    Given I register a custom directive with WatirNg
+    When I identify an element with a "ng_foo" of "bar"
+    Then no error is raised

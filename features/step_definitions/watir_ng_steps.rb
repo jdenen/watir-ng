@@ -1,24 +1,32 @@
-Given /^I've navigated to a web page$/ do
+Given /^an element exists on a web page$/ do
   @browser.goto "https://docs.angularjs.org/guide/directive"
 end
 
-Given /^I register a custom directive with WatirNg$/ do
-  WatirNg.custom_directives << :ng_foo
+Given /^an element does not exist on a web page$/ do
+  @browser.goto "http://www.google.com"
 end
 
-When /^I identify an element with a "(.*)" of "(.*)"$/ do |locator, value|
-  @element = @browser.element(locator.to_sym => value)
+When /^I use a (standard|directive) identifier to find it$/ do |id|
+  elements = {
+    "standard"  => {
+      "element" => :h2,
+      "identifier" => { id: "creating-directives" }
+    },
+    "directive" => {
+      "element" => :div,
+      "identifier" => { ng_show: "loading" }
+    }
+  }
+  
+  @element = @browser.send(elements[id]["element"], elements[id]["identifier"])
 end
 
-Then /^I found the "(.*)"$/ do |html|
-  expect(@element.tag_name).to eq html
+Then /^the element is located$/ do
+  expect(@element).to exist
 end
 
-Then /^the element is missing$/ do
-  expect(@element.present?).to be false
+Then /^the element is not found$/ do
+  expect(@element).to_not exist
 end
 
-Then /^no error is raised$/ do
-  expect{ @element.exist? }.to_not raise_error
-end
 

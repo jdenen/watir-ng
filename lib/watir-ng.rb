@@ -22,14 +22,15 @@ module WatirNg
                  )
 
   #
-  # Inserts `NG_STRINGS` into `cls.attributes` as symbols when included in the class.
+  # Inserts `NG_STRINGS` and `custom_directives` into `cls.attributes` as symbols when
+  #  included in the class.
   #
   # @param cls [Class]
   # @return [nil]
   #
   def self.included cls
     if cls.respond_to? :attributes
-      ng_directives.each { |ng| cls.attributes << ng }
+      ng_directives.push(*custom_directives).each { |ng| cls.attributes << ng }
     end
   end
 
@@ -41,6 +42,15 @@ module WatirNg
   #
   def self.ng_directives
     @ng_directives ||= NG_STRINGS.map(&:to_sym)
+  end
+
+  #
+  # Collect custom defined directives.
+  #
+  # @return [Array]
+  #
+  def self.custom_directives
+    @custom_directives ||= []
   end
 end
 

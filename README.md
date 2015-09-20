@@ -24,7 +24,14 @@ When identifying elements, use the `ng` directives like you would `id`, `class`,
 submit_button = browser.button(ng_click: "foo")
 submit_button.click
 ```
-
+## Customization
+To add your own custom attributes which are not specific to AngularJS, push a custom identifier onto WatirNg.custom_directives before instantiating the browser object:
+```ruby
+require 'watir-webdriver'
+require 'watir-ng'
+WatirNg.custom_directives << :ng_foo_bar
+@browser = Watir::Browser.new
+```
 ## Installation
 
 Add this line to your application's Gemfile:

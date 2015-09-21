@@ -1,35 +1,49 @@
 require 'spec_helper'
 
 describe WatirNg do
-  let(:directives){ WatirNg::NG_STRINGS.map(&:to_sym) }
-  
   it 'has a version number' do
     expect(WatirNg::VERSION).not_to be nil
   end
 
-  describe "#custom_directives" do
-    it "returns an array" do
-      expect(WatirNg.custom_directives).to eq []
+  describe ".directives" do
+    it "returns a Directives object" do
+      expect(WatirNg.directives).to be_a WatirNg::Directives
+    end
+
+    it "memoizes the Directives object" do
+      expect(WatirNg.directives).to eq WatirNg.directives
     end
   end
 
   context "when included on a class" do
-    it "adds each ng directive to class.attributes" do
+    let(:ng){ WatirNg::Directives.new.ng }
+    
+    it "patches ng directives onto Class.attributes" do
       TestClass.send(:include, WatirNg)
-      expect(TestClass.attributes).to eq directives
+      expect(TestClass.attributes).to eq ng.map(&:to_sym)
     end
 
-    it "does not overwrite the class.attributes" do
+    it "does not overwrite the Class.attributes" do
       TestClass.attributes = [:foo]
       TestClass.send(:include, WatirNg)
       expect(TestClass.attributes).to include(:foo)
-      expect(TestClass.attributes).to include(*directives)
+      expect(TestClass.attributes).to include(*ng.map(&:to_sym))
+    end
+  end
+
+  describe ".register" do
+    let(:dir_obj){ double "WatirNg::Directives"}
+    before do
+      expect(subject).to receive(:directives).and_return dir_obj
+      expect(dir_obj).to receive(:add).with [:foobar, :foobaz]
+    end
+    
+    it "passes custom attributes on as an array" do
+      subject.register :foobar, :foobaz
     end
 
-    it "includes custom directives when configured" do
-      WatirNg.custom_directives << :ng_foo_bar
-      TestClass.send(:include, WatirNg)
-      expect(TestClass.attributes).to include(:ng_foo_bar)
+    it "maps its arguments to symbols" do
+      subject.register "foobar", "foobaz"
     end
   end
 end

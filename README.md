@@ -56,5 +56,5 @@ Or install it yourself with:
 
 ## Questions, Comments, Concerns
 
-Find me on Twitter ([@jpdenen](http://twitter.com/jpdenen)) or write up an issue.
+Find me on Twitter ([@jpdenen](http://twitter.com/jpdenen)), gitter ([@jdenen](http://gitter.im/jdenen)) or write up an [issue](https://github.com/jdenen/watir-ng/issues/new).
 

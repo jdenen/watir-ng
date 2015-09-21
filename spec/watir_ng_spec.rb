@@ -20,14 +20,14 @@ describe WatirNg do
     
     it "patches ng directives onto Class.attributes" do
       TestClass.send(:include, WatirNg)
-      expect(TestClass.attributes).to eq ng
+      expect(TestClass.attributes).to eq ng.map(&:to_sym)
     end
 
     it "does not overwrite the Class.attributes" do
       TestClass.attributes = [:foo]
       TestClass.send(:include, WatirNg)
       expect(TestClass.attributes).to include(:foo)
-      expect(TestClass.attributes).to include(*ng)
+      expect(TestClass.attributes).to include(*ng.map(&:to_sym))
     end
   end
 

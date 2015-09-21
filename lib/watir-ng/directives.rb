@@ -1,7 +1,7 @@
 module WatirNg
   class Directives
     def ng
-      %i(ng_jq ng_app ng_href ng_src ng_srcset ng_disabled ng_checked ng_readonly 
+      %w(ng_jq ng_app ng_href ng_src ng_srcset ng_disabled ng_checked ng_readonly 
          ng_selected ng_open ng_form ng_value ng_bind ng_bind_template ng_bind_html 
          ng_change ng_class ng_class_odd ng_class_even ng_cloak ng_controller ng_csp 
          ng_click ng_dblclick ng_mousedown ng_mouseup ng_mouseover ng_mouseenter 

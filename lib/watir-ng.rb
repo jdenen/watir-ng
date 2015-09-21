@@ -16,7 +16,7 @@ module WatirNg
     # @return [nil]
     #
     def included cls
-      cls.attributes.push *directives.ng
+      cls.attributes.push *directives.ng.map(&:to_sym)
     end
 
     #

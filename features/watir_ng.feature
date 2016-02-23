@@ -1,21 +1,17 @@
 Feature: Identifying HTML elements with ng directives
 
-  Scenario: Locating HTML elements with standard identifiers
-    Given an element exists on a web page
-    When I use a standard identifier to find it
-    Then the element is located
+  Scenario: Locating elements with standard identifiers
+    When I open the test page
+    And I identify an element by standard identifier
+    Then the element is found
 
-  Scenario: Locating HTML elements with ng directives
-    Given an element exists on a web page
-    When I use a directive identifier to find it
-    Then the element is located
+  Scenario: Locating elements with ng directives
+    When I open the test page
+    And I identify an element by ng directive
+    Then the element is found
 
-  Scenario: Not locating HTML elements with standard identifiers
-    Given an element does not exist on a web page
-    When I use a standard identifier to find it
-    Then the element is not found
-
-  Scenario: Not locating HTML elements with ng directives
-    Given an element does not exist on a web page
-    When I use a directive identifier to find it
-    Then the element is not found
+  Scenario: Locating elements with custom directives
+    Given I register a custom directive
+    When I open the test page
+    And I identify an element by custom directive
+    Then the element is found

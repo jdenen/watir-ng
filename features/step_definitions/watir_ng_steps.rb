@@ -1,32 +1,25 @@
-Given /^an element exists on a web page$/ do
-  @browser.goto "https://docs.angularjs.org/guide/directive"
+Given /^I register a custom directive$/ do
+  WatirNg.register :ng_custom
 end
 
-Given /^an element does not exist on a web page$/ do
-  @browser.goto "http://www.google.com"
+When /^I open the test page$/ do
+  path = File.expand_path "../../support/test.html", __FILE__
+  @browser = Watir::Browser.start "file://#{path}"
 end
 
-When /^I use a (standard|directive) identifier to find it$/ do |id|
-  elements = {
-    "standard"  => {
-      "element" => :h2,
-      "identifier" => { id: "creating-directives" }
-    },
-    "directive" => {
-      "element" => :div,
-      "identifier" => { ng_show: "loading" }
-    }
-  }
-  
-  @element = @browser.send(elements[id]["element"], elements[id]["identifier"])
+When /^I identify an element by standard identifier$/ do
+  @span = @browser.span(id: 'span-id') 
 end
 
-Then /^the element is located$/ do
-  expect(@element).to exist
+When /^I identify an element by ng directive$/ do
+  @span = @browser.span(ng_class: 'span-ng-class')
 end
 
-Then /^the element is not found$/ do
-  expect(@element).to_not exist
+When /^I identify an element by custom directive$/ do
+  @span = @browser.span(ng_custom: 'span-ng-custom')
 end
 
-
+Then /^the element is found$/ do
+  require 'pry'; binding.pry
+  expect(@span.exist?).to eq true
+end

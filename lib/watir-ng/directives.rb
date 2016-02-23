@@ -1,5 +1,4 @@
 module WatirNg
-  
   #
   # Object that stores ng directives and patches custom directives onto Watir::HTMLElement.
   #

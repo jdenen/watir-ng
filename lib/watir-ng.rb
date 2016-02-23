@@ -6,9 +6,7 @@ require "watir-ng/version"
 # Adds AngularJS `ng` directives as identifiers for `Watir::Webdriver` elements.
 #
 module WatirNg
-
   class << self
-    
     #
     # Patch ng directives onto the array returned by `BaseClass.attributes`.
     #

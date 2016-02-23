@@ -30,9 +30,7 @@ module WatirNg
     # @see Watir::HTMLElement
     #
     def add directives
-      directives.tap do |array|
-        array.each { |custom| Watir::HTMLElement.attributes << custom }
-      end
+      directives.each { |custom| Watir::HTMLElement.attributes << custom }
     end
   end
 end

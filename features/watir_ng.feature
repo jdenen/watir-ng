@@ -11,7 +11,6 @@ Feature: Identifying HTML elements with ng directives
     Then the element is found
 
   Scenario: Locating elements with custom directives
-    Given I register a custom directive
     When I open the test page
     And I identify an element by custom directive
     Then the element is found

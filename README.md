@@ -6,32 +6,36 @@ Identify [watir-webdriver](http://github.com/watir/watir-webdriver) elements wit
 
 ## Usage
 
-Require `watir-ng` anywhere you'd instantiate a browser instance and `watir-ng` will patch directive identifiers onto `Watir::HTMLElement`.
-
-```ruby
-require 'watir-webdriver'
-require 'watir-ng'
-
-browser = Watir::Browser.new :chrome
-```
-
 When identifying elements, use the `ng` directives like you would `id`, `class`, etc. Be sure to use underscores instead of dashes though!
 
 ```ruby
 # To find and click this HTML element:
 #     <button ng-click="foo">Submit</button>
 
-submit_button = browser.button(ng_click: "foo")
+submit_button = @browser.button(ng_click: "foo")
 submit_button.click
 ```
-## Customization
-To add your own custom attributes which are not specific to AngularJS, push a custom identifier onto WatirNg.custom_directives before instantiating the browser object:
+
+To ensure your browser objects have access to the ng identifiers, run `patch!` before instantiating. 
+
 ```ruby
-require 'watir-webdriver'
 require 'watir-ng'
-WatirNg.custom_directives << :ng_foo_bar
+
+WatirNg.patch!
+
 @browser = Watir::Browser.new
 ```
+
+You can identify elements with custom directives by registering them before patching the browser. 
+
+```ruby
+require 'watir-ng'
+
+WatirNg.register(:ng_foo, :ng_bar).patch!
+
+@browser = Watir::Browser.new
+```
+
 ## Installation
 
 Add this line to your application's Gemfile:

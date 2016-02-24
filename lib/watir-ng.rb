@@ -6,20 +6,41 @@ require "watir-ng/version"
 #
 module WatirNg
   class << self
+    
     #
-    # Patch ng directives onto the array returned by `BaseClass.attributes`.
+    # Register custom directives as element identifiers.
     #
-    # @param cls [Class] base class
-    # @return [nil]
+    # @example
+    #   WatirNg.register "ng_foo", :ng_bar
     #
-    def included cls
-      cls.attributes.push *directives
+    # @param custom_directives [Symbol, String]
+    # @return [WatirNg]
+    #
+    def register *args
+      tap { |ng| ng.custom_directives.push *args }
     end
 
     #
-    # Return directive collection object.
+    # Patch Watir::HTMLElements with ng and custom directives.
     #
-    # @return [WatirNg::Directives]
+    # @example
+    #   require 'watir-webdriver'
+    #   require 'watir-ng'
+    #   WatirNg.patch!
+    #   browser = Watir::Browser.start
+    #
+    # @return [Array]
+    #
+    def patch!
+      attributes = directives.push *custom_directives.map(&:to_sym)
+      Watir::HTMLElement.attributes.push *attributes
+    end
+
+    # @api private
+    #
+    # Return array of ng directives.
+    #
+    # @return [Array<Symbol>]
     #
     def directives
       %w(ng_jq ng_app ng_href ng_src ng_srcset ng_disabled ng_checked ng_readonly 
@@ -32,23 +53,14 @@ module WatirNg
          ng_hide ng_style ng_switch ng_transclude).map(&:to_sym)
     end
 
+    # @api private
+    #
+    # Return array of custom directives.
+    #
+    # @return [Array]
+    #
     def custom_directives
       @custom_directives ||= []
-    end
-
-    #
-    # Register custom directives to be patched onto the base class attributes array.
-    #
-    # @param custom_directives [Symbol, String]
-    # @return [WatirNg]
-    #
-    def register *args
-      tap { |ng| ng.custom_directives.push *args }
-    end
-
-    def patch!
-      attributes = directives.push *custom_directives.map(&:to_sym)
-      Watir::HTMLElement.attributes.push *attributes
     end
     
   end

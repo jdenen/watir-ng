@@ -1,5 +1,5 @@
-require "watir-webdriver"
-require "watir-ng/version"
+require 'watir'
+require 'watir-ng/version'
 
 #
 # Adds AngularJS `ng` directives as identifiers for `Watir::Webdriver` elements.

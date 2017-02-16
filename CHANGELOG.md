@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v2.1.0
+- Removed the deprecated calls for `require 'watir-webdriver`. As of watir 6.0 this is now deprecated.
+- As of this version Ruby 1.9.3 is not compatible with watir-ng.
+
 ## v2.0.0 (Feb 24 2016)
 - Patch browser objects with `WatirNg.patch!`
 - Add custom directive identifiers with `WatirNg.register`

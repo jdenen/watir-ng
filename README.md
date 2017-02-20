@@ -8,6 +8,8 @@ Identify [watir-webdriver](http://github.com/watir/watir-webdriver) elements wit
 
 When identifying elements, use the `ng` directives like you would `id`, `class`, etc. Be sure to use underscores instead of dashes though!
 
+As of version `2.1.0`, this gem requires Ruby >= 2.0.
+
 ```ruby
 # To find and click this HTML element:
 #     <button ng-click="foo">Submit</button>
@@ -16,7 +18,7 @@ submit_button = @browser.button(ng_click: "foo")
 submit_button.click
 ```
 
-To ensure your browser objects have access to the ng identifiers, run `patch!` before instantiating. 
+To ensure your browser objects have access to the ng identifiers, run `patch!` before instantiating.
 
 ```ruby
 require 'watir-ng'
@@ -26,7 +28,7 @@ WatirNg.patch!
 @browser = Watir::Browser.new
 ```
 
-You can identify elements with custom directives by registering them before patching the browser. 
+You can identify elements with custom directives by registering them before patching the browser.
 
 ```ruby
 require 'watir-ng'
@@ -60,5 +62,4 @@ Or install it yourself with:
 
 ## Questions, Comments, Concerns
 
-Find me on Twitter ([@jpdenen](http://twitter.com/jpdenen)), gitter ([@jdenen](http://gitter.im/jdenen)) or write up an [issue](https://github.com/jdenen/watir-ng/issues/new).
-
+Find me on Twitter ([@jpdenen](http://twitter.com/metaxjohnson)), gitter ([@jdenen](http://gitter.im/jdenen)), or write up an [issue](https://github.com/jdenen/watir-ng/issues/new).
